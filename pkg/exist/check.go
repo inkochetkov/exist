@@ -1,14 +1,18 @@
 package exist
 
-// InitDirFile - check dirictory and file
-func InitDirFile(path, nameFile string) error {
+import "path"
 
-	err := InitDir(path)
+// InitDirFile - check dirictory and file
+func InitDirFile(pathDir, nameFile string) error {
+
+	err := InitDir(pathDir)
 	if err != nil {
 		return err
 	}
 
-	err = InitFile(nameFile)
+	pathFile := path.Join(pathDir, nameFile)
+
+	err = InitFile(pathFile)
 	if err != nil {
 		return err
 	}
