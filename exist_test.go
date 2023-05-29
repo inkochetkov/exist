@@ -1,10 +1,9 @@
-package test
+package exist
 
 import (
 	"os"
 	"testing"
 
-	"github.com/inkochetkov/exist/pkg/exist"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -12,25 +11,25 @@ import (
 func TestDir(t *testing.T) {
 
 	t.Log("Test check dir")
-	checkPath := "./../test"
+	checkPath := "/test"
 
-	check := exist.CheckDir(checkPath)
+	check := CheckDir(checkPath)
 
-	assert.Equal(t, true, check)
+	assert.Equal(t, false, check)
 
 	t.Log("Test create dir")
-	createPath := "./../test/test"
+	createPath := "/test"
 
-	err := exist.CreateDir(createPath)
+	err := CreateDir(createPath)
 	assert.NoError(t, err)
 
 	err = os.Remove(createPath)
 	assert.NoError(t, err)
 
 	t.Log("Test init dir")
-	initPath := "./../test/test"
+	initPath := "/test"
 
-	err = exist.InitDir(initPath)
+	err = InitDir(initPath)
 	assert.NoError(t, err)
 
 	err = os.Remove(initPath)
@@ -45,7 +44,7 @@ func TestFile(t *testing.T) {
 	t.Log("Test check file")
 
 	checkPath := "exist_test.go"
-	check := exist.CheckFile(checkPath)
+	check := CheckFile(checkPath)
 
 	assert.Equal(t, true, check)
 
@@ -53,7 +52,7 @@ func TestFile(t *testing.T) {
 
 	createPath := "test.go"
 
-	file, err := exist.CreateFile(createPath)
+	file, err := CreateFile(createPath)
 	assert.NoError(t, err)
 
 	file.Close()
@@ -65,7 +64,7 @@ func TestFile(t *testing.T) {
 
 	initPath := "test.go"
 
-	err = exist.InitFile(initPath)
+	err = InitFile(initPath)
 	assert.NoError(t, err)
 
 	err = os.Remove(initPath)
